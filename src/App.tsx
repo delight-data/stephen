@@ -10,8 +10,8 @@ const DashboardLoader = () => {
 
   // Mapping des fichiers de dashboard
   const dashboards: { [key: string]: React.FC } = {
-    "theater-sentiment": TheaterSentimentDashboard,
-    "francofolies": FrancofoliesDashboard,
+    "renaissance-c52s9g": TheaterSentimentDashboard,
+    "francofolies-dh3qf7": FrancofoliesDashboard,
     // Ajouter d'autres dashboards ici : "client2": Client2Dashboard,
   };
   const SelectedDashboard = dashboards[dashboardId];
