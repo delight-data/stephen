@@ -4,6 +4,7 @@ import { HashRouter as Router, Routes, Route, useParams } from 'react-router-dom
 import TheaterSentimentDashboard from './TheaterSentimentDashboard';
 import FrancofoliesDashboard from './francofolies-sentiment-analysis';
 import PlpDashboard from './plp-dashboard';
+import franceGalop from './franceGalop'
 
 // Fonction pour charger dynamiquement un dashboard
 const DashboardLoader = () => {
@@ -14,6 +15,7 @@ const DashboardLoader = () => {
     "renaissance-c52s9g": TheaterSentimentDashboard,
     "francofolies-dh3qf7": FrancofoliesDashboard,
     "plp-b91lc": PlpDashboard,
+    "fg-a7f6h": franceGalop,
     // Ajouter d'autres dashboards ici : "client2": Client2Dashboard,
   };
   const SelectedDashboard = dashboards[dashboardId];
