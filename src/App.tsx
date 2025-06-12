@@ -5,6 +5,7 @@ import TheaterSentimentDashboard from './TheaterSentimentDashboard';
 import FrancofoliesDashboard from './francofolies-sentiment-analysis';
 import PlpDashboard from './plp-dashboard';
 import franceGalop from './franceGalop'
+import CircusDashboard from './Circus Dashboard'
 
 // Fonction pour charger dynamiquement un dashboard
 const DashboardLoader = () => {
@@ -16,6 +17,7 @@ const DashboardLoader = () => {
     "francofolies-dh3qf7": FrancofoliesDashboard,
     "plp-b91lc": PlpDashboard,
     "fg-a7f6h": franceGalop,
+    "gruss-p2n8v": CircusDashboard,
     // Ajouter d'autres dashboards ici : "client2": Client2Dashboard,
   };
   const SelectedDashboard = dashboards[dashboardId];
