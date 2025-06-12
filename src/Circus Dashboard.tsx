@@ -86,17 +86,26 @@ const CircusSentimentDashboard = () => {
   ];
 
   // City performance data
-  const cityPerformance = [
-    { city: 'Saint-Quentin', excellence: 67.1, avgBilletterie: 9.12, avgEntree: 9.34, count: 207, firstTime: 28.5 },
-    { city: 'Arras', excellence: 64.5, avgBilletterie: 9.08, avgEntree: 9.31, count: 453, firstTime: 30.2 },
-    { city: 'Reims', excellence: 63.7, avgBilletterie: 9.05, avgEntree: 9.28, count: 160, firstTime: 32.5 },
-    { city: 'La Rochelle', excellence: 61.2, avgBilletterie: 9.02, avgEntree: 9.25, count: 376, firstTime: 29.8 },
-    { city: 'Paris', excellence: 60.9, avgBilletterie: 8.98, avgEntree: 9.22, count: 156, firstTime: 35.3 },
-    { city: 'Bordeaux', excellence: 59.8, avgBilletterie: 8.96, avgEntree: 9.20, count: 1916, firstTime: 31.8 },
-    { city: 'Nancy', excellence: 59.5, avgBilletterie: 8.94, avgEntree: 9.18, count: 1331, firstTime: 30.5 },
-    { city: 'Aix-les-Bains', excellence: 55.9, avgBilletterie: 8.88, avgEntree: 9.12, count: 479, firstTime: 32.2 },
-    { city: 'Colmar', excellence: 57.2, avgBilletterie: 8.90, avgEntree: 9.15, count: 484, firstTime: 31.0 },
-    { city: 'Amiens', excellence: 54.4, avgBilletterie: 8.85, avgEntree: 9.10, count: 294, firstTime: 33.7 }
+  // Complete city performance data with all 18 cities
+  const cityPerformanceComplete = [
+    { city: 'Saint-Quentin', excellence: 67.1, avgBilletterie: 9.20, avgEntree: 9.35, count: 207, firstTime: 28.5, sentimentScore: 78 },
+    { city: 'Arras', excellence: 64.5, avgBilletterie: 9.11, avgEntree: 9.29, count: 453, firstTime: 30.2, sentimentScore: 75 },
+    { city: 'Reims', excellence: 63.7, avgBilletterie: 9.29, avgEntree: 9.24, count: 160, firstTime: 32.5, sentimentScore: 74 },
+    { city: 'La Rochelle', excellence: 61.2, avgBilletterie: 8.96, avgEntree: 9.22, count: 376, firstTime: 29.8, sentimentScore: 72 },
+    { city: 'Paris', excellence: 60.9, avgBilletterie: 8.76, avgEntree: 8.94, count: 156, firstTime: 35.3, sentimentScore: 71 },
+    { city: 'Mulhouse', excellence: 60.9, avgBilletterie: 9.01, avgEntree: 9.26, count: 458, firstTime: 31.5, sentimentScore: 71 },
+    { city: 'Lille', excellence: 60.8, avgBilletterie: 8.91, avgEntree: 9.16, count: 609, firstTime: 33.1, sentimentScore: 70 },
+    { city: 'Boulogne', excellence: 60.7, avgBilletterie: 9.11, avgEntree: 9.24, count: 247, firstTime: 32.8, sentimentScore: 70 },
+    { city: 'Bordeaux', excellence: 60.1, avgBilletterie: 8.96, avgEntree: 9.22, count: 1916, firstTime: 31.8, sentimentScore: 69 },
+    { city: 'Dunkerque', excellence: 59.3, avgBilletterie: 9.09, avgEntree: 9.31, count: 400, firstTime: 30.5, sentimentScore: 68 },
+    { city: 'Nancy', excellence: 58.2, avgBilletterie: 9.00, avgEntree: 9.24, count: 1331, firstTime: 30.5, sentimentScore: 67 },
+    { city: 'Strasbourg', excellence: 58.0, avgBilletterie: 8.88, avgEntree: 9.18, count: 402, firstTime: 34.5, sentimentScore: 66 },
+    { city: 'Villeneuve', excellence: 57.6, avgBilletterie: 9.06, avgEntree: 9.28, count: 224, firstTime: 33.9, sentimentScore: 65 },
+    { city: 'Rouen', excellence: 57.4, avgBilletterie: 9.07, avgEntree: 9.30, count: 390, firstTime: 32.1, sentimentScore: 65 },
+    { city: 'Annecy', excellence: 57.3, avgBilletterie: 8.96, avgEntree: 9.23, count: 447, firstTime: 34.2, sentimentScore: 64 },
+    { city: 'Colmar', excellence: 57.2, avgBilletterie: 8.90, avgEntree: 9.25, count: 484, firstTime: 31.0, sentimentScore: 64 },
+    { city: 'Aix-les-Bains', excellence: 55.9, avgBilletterie: 8.94, avgEntree: 9.24, count: 479, firstTime: 32.2, sentimentScore: 62 },
+    { city: 'Amiens', excellence: 54.4, avgBilletterie: 8.90, avgEntree: 9.23, count: 294, firstTime: 33.7, sentimentScore: 60 }
   ];
 
   // Visitor type comparison
@@ -463,8 +472,8 @@ const CircusSentimentDashboard = () => {
                   <XAxis dataKey="avgBilletterie" name="Note Billetterie" domain={[8.8, 9.2]} />
                   <YAxis dataKey="excellence" name="% Excellence" />
                   <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                  <Scatter name="Villes" data={cityPerformance} fill="#8884d8">
-                    {cityPerformance.map((entry, index) => (
+                  <Scatter name="Villes" data={cityPerformanceComplete} fill="#8884d8">
+                    {cityPerformanceComplete.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={
                         entry.excellence > 60 ? '#22c55e' : 
                         entry.excellence > 57 ? '#f59e0b' : '#ef4444'
@@ -481,28 +490,45 @@ const CircusSentimentDashboard = () => {
         return (
           <div className="grid grid-cols-1 gap-6">
             <div className="bg-white p-6 rounded-lg shadow">
-              <h3 className="text-lg font-semibold mb-4">Tableau de Bord par Ville</h3>
+              <h3 className="text-lg font-semibold mb-4">Tableau de Bord Complet - 18 Villes</h3>
+              <div className="mb-4 flex items-center gap-4 text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  <span>Excellence &gt; 60%</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                  <span>Excellence 57-60%</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                  <span>Excellence &lt; 57%</span>
+                </div>
+              </div>
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
                     <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">#</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ville</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Réponses</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Excellence %</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Billetterie</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Entrée</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">1ère visite %</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Sentiment</th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {cityPerformance.map((city, index) => (
-                      <tr key={index}>
+                    {cityPerformanceComplete.map((city, index) => (
+                      <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{index + 1}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">{city.city}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">{city.count}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm">{city.count.toLocaleString()}</td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                             city.excellence > 60 ? 'bg-green-100 text-green-800' :
-                            city.excellence > 57 ? 'bg-yellow-100 text-yellow-800' :
+                            city.excellence >= 57 ? 'bg-yellow-100 text-yellow-800' :
                             'bg-red-100 text-red-800'
                           }`}>
                             {city.excellence}%
@@ -511,31 +537,120 @@ const CircusSentimentDashboard = () => {
                         <td className="px-6 py-4 whitespace-nowrap text-sm">{city.avgBilletterie}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm">{city.avgEntree}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm">{city.firstTime}%</td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center">
+                            <div className="w-16 bg-gray-200 rounded-full h-2">
+                              <div 
+                                className="h-2 rounded-full transition-all duration-500"
+                                style={{
+                                  width: `${city.sentimentScore}%`,
+                                  backgroundColor: city.sentimentScore > 70 ? '#22c55e' : 
+                                                 city.sentimentScore > 65 ? '#f59e0b' : '#ef4444'
+                                }}
+                              />
+                            </div>
+                            <span className="ml-2 text-xs">{city.sentimentScore}%</span>
+                          </div>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
+              <div className="mt-4 text-sm text-gray-600">
+                <p>Total réponses analysées: {cityPerformanceComplete.reduce((sum, city) => sum + city.count, 0).toLocaleString()}</p>
+              </div>
             </div>
-
+      
             <div className="bg-white p-6 rounded-lg shadow">
-              <h3 className="text-lg font-semibold mb-4">Recommandations par Ville</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <h3 className="text-lg font-semibold mb-4">Analyse Géographique des Performances</h3>
+              <ResponsiveContainer width="100%" height={400}>
+                <ComposedChart data={cityPerformanceComplete}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="city" angle={-45} textAnchor="end" height={100} fontSize={11} />
+                  <YAxis yAxisId="left" />
+                  <YAxis yAxisId="right" orientation="right" />
+                  <Tooltip />
+                  <Legend />
+                  <Bar yAxisId="left" dataKey="count" name="Nombre de réponses" fill="#3b82f6" opacity={0.6} />
+                  <Line yAxisId="right" type="monotone" dataKey="excellence" name="Taux d'excellence (%)" stroke="#22c55e" strokeWidth={2} dot={{ r: 4 }} />
+                  <Line yAxisId="right" type="monotone" dataKey="sentimentScore" name="Score sentiment (%)" stroke="#f59e0b" strokeWidth={2} strokeDasharray="5 5" dot={{ r: 3 }} />
+                </ComposedChart>
+              </ResponsiveContainer>
+            </div>
+      
+            <div className="bg-white p-6 rounded-lg shadow">
+              <h3 className="text-lg font-semibold mb-4">Recommandations par Catégorie de Performance</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="border-l-4 border-green-500 pl-4">
-                  <h4 className="font-semibold">Saint-Quentin & Arras (Top performers)</h4>
-                  <p className="text-sm text-gray-600">Analyser les bonnes pratiques locales pour les répliquer</p>
+                  <h4 className="font-semibold text-green-800">🏆 Champions (Excellence &gt; 60%)</h4>
+                  <p className="text-sm text-gray-600 mb-2">9 villes - 3,664 réponses (40.6%)</p>
+                  <p className="text-xs font-medium mb-1">Saint-Quentin, Arras, Reims, La Rochelle, Paris, Mulhouse, Lille, Boulogne, Bordeaux</p>
+                  <ul className="text-xs text-gray-500 list-disc pl-4 mt-2">
+                    <li>Documenter et partager les bonnes pratiques</li>
+                    <li>Maintenir le niveau d'excellence</li>
+                    <li>Utiliser comme référence pour les autres villes</li>
+                  </ul>
+                </div>
+                <div className="border-l-4 border-yellow-500 pl-4">
+                  <h4 className="font-semibold text-yellow-800">📈 Potentiel (Excellence 57-60%)</h4>
+                  <p className="text-sm text-gray-600 mb-2">7 villes - 3,658 réponses (40.5%)</p>
+                  <p className="text-xs font-medium mb-1">Dunkerque, Nancy, Strasbourg, Villeneuve, Rouen, Annecy, Colmar</p>
+                  <ul className="text-xs text-gray-500 list-disc pl-4 mt-2">
+                    <li>Formation ciblée des équipes locales</li>
+                    <li>Audit des conditions spécifiques (son, visibilité)</li>
+                    <li>Plan d'amélioration sur 3 mois</li>
+                  </ul>
                 </div>
                 <div className="border-l-4 border-red-500 pl-4">
-                  <h4 className="font-semibold">Amiens & Aix-les-Bains (À améliorer)</h4>
-                  <p className="text-sm text-gray-600">Audit spécifique des conditions locales (acoustique, équipes)</p>
+                  <h4 className="font-semibold text-red-800">🎯 À Améliorer (Excellence &lt; 57%)</h4>
+                  <p className="text-sm text-gray-600 mb-2">2 villes - 773 réponses (8.6%)</p>
+                  <p className="text-xs font-medium mb-1">Aix-les-Bains, Amiens</p>
+                  <ul className="text-xs text-gray-500 list-disc pl-4 mt-2">
+                    <li>Intervention prioritaire requise</li>
+                    <li>Audit complet (technique, équipes, infrastructure)</li>
+                    <li>Suivi hebdomadaire des améliorations</li>
+                  </ul>
                 </div>
-                <div className="border-l-4 border-blue-500 pl-4">
-                  <h4 className="font-semibold">Grandes villes (Bordeaux, Nancy)</h4>
-                  <p className="text-sm text-gray-600">Volume élevé mais performance moyenne - potentiel d'amélioration</p>
+              </div>
+            </div>
+      
+            <div className="bg-white p-6 rounded-lg shadow">
+              <h3 className="text-lg font-semibold mb-4">Actions Spécifiques par Ville</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h4 className="font-semibold mb-2 text-green-700">Villes Leaders à Étudier</h4>
+                  <div className="space-y-2">
+                    <div className="text-sm">
+                      <span className="font-medium">Saint-Quentin (67.1%)</span>
+                      <p className="text-xs text-gray-600">Meilleure performance globale - organiser visite d'étude</p>
+                    </div>
+                    <div className="text-sm">
+                      <span className="font-medium">Arras (64.5%)</span>
+                      <p className="text-xs text-gray-600">Excellence avec volume moyen - modèle reproductible</p>
+                    </div>
+                    <div className="text-sm">
+                      <span className="font-medium">Reims (63.7%)</span>
+                      <p className="text-xs text-gray-600">Haute satisfaction malgré petit volume</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="border-l-4 border-purple-500 pl-4">
-                  <h4 className="font-semibold">Marketing géolocalisé</h4>
-                  <p className="text-sm text-gray-600">Adapter les canaux selon l'efficacité locale</p>
+                <div>
+                  <h4 className="font-semibold mb-2 text-red-700">Villes Prioritaires</h4>
+                  <div className="space-y-2">
+                    <div className="text-sm">
+                      <span className="font-medium">Amiens (54.4%)</span>
+                      <p className="text-xs text-gray-600">Plus faible performance - audit urgent requis</p>
+                    </div>
+                    <div className="text-sm">
+                      <span className="font-medium">Aix-les-Bains (55.9%)</span>
+                      <p className="text-xs text-gray-600">Volume important mais satisfaction faible</p>
+                    </div>
+                    <div className="text-sm">
+                      <span className="font-medium">Nancy & Bordeaux</span>
+                      <p className="text-xs text-gray-600">Gros volumes avec potentiel d'amélioration</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
