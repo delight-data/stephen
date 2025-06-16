@@ -7,6 +7,7 @@ import PlpDashboard from './plp-dashboard';
 import franceGalop from './franceGalop';
 import CircusDashboard from './Circus Dashboard';
 import ldlcDashboard from './ldlc.tsx'; 
+import UgoPlay from './ugo-play.tsx'
 
 // Fonction pour charger dynamiquement un dashboard
 const DashboardLoader = () => {
@@ -20,6 +21,7 @@ const DashboardLoader = () => {
     "fg-a7f6h": franceGalop,
     "gruss-p2n8v": CircusDashboard,
     "ldlc-h3p8rt": ldlcDashboard,
+    "ugo-play-b8afv": UgoPlay,
     // Ajouter d'autres dashboards ici : "client2": Client2Dashboard,
   };
   const SelectedDashboard = dashboards[dashboardId];
