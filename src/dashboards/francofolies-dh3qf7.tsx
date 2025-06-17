@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell, PieChart, Pie, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 
 const FrancofoliesSentimentAnalysis = () => {
@@ -119,21 +119,10 @@ const FrancofoliesSentimentAnalysis = () => {
     { name: 'Pricing', priority: 4, sentiment: -45 }
   ];
   
-  // Custom tooltip for charts
-  const CustomTooltip = ({ active, payload }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-white p-4 border border-gray-300 rounded shadow-md">
-          <p className="font-semibold">{payload[0].name}</p>
-          <p className="text-sm">Value: {payload[0].value}%</p>
-        </div>
-      );
-    }
-    return null;
-  };
+
   
   // Sentiment color functions
-  const getSentimentColor = (sentiment) => {
+  const getSentimentColor = (sentiment: string) => {
     switch(sentiment) {
       case 'very positive': return '#15803d';
       case 'positive': return '#22c55e';
@@ -240,7 +229,7 @@ const FrancofoliesSentimentAnalysis = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis tickFormatter={(value) => `${value}%`} />
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip  />
                   <Legend />
                   <Bar dataKey="value" name="Percentage" fill="#3b82f6" />
                 </BarChart>
@@ -279,7 +268,7 @@ const FrancofoliesSentimentAnalysis = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis tickFormatter={(value) => `${value}%`} />
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip />
                   <Legend />
                   <Bar dataKey="value" name="Percentage" fill="#3b82f6" />
                 </BarChart>
@@ -298,7 +287,7 @@ const FrancofoliesSentimentAnalysis = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis tickFormatter={(value) => `${value}%`} />
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip />
                   <Legend />
                   <Bar dataKey="value" name="Attendance %" fill="#3b82f6" />
                 </BarChart>
@@ -312,7 +301,7 @@ const FrancofoliesSentimentAnalysis = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis tickFormatter={(value) => `${value}%`} />
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip />
                   <Legend />
                   <Bar dataKey="value" name="Attendance %" fill="#3b82f6" />
                 </BarChart>

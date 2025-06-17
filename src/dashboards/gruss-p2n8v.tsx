@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell, PieChart, Pie, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, LineChart, Line, ScatterChart, Scatter, ComposedChart } from 'recharts';
+import { useState } from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell, PieChart, Pie, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Line, ScatterChart, Scatter, ComposedChart } from 'recharts';
 
 const CircusSentimentDashboard = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -179,22 +179,6 @@ const CircusSentimentDashboard = () => {
     ]
   };
 
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-white p-4 border border-gray-300 rounded shadow-lg">
-          <p className="font-semibold">{label}</p>
-          {payload.map((entry, index) => (
-            <p key={index} className="text-sm" style={{ color: entry.color }}>
-              {entry.name}: {entry.value}{entry.unit || ''}
-            </p>
-          ))}
-        </div>
-      );
-    }
-    return null;
-  };
-
   const renderContent = () => {
     switch(activeTab) {
       case 'overview':
@@ -264,7 +248,7 @@ const CircusSentimentDashboard = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis tickFormatter={(value) => `${value}%`} />
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip  />
                   <Bar dataKey="value" name="Pourcentage">
                     {spectacleEvaluation.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />
@@ -302,7 +286,7 @@ const CircusSentimentDashboard = () => {
                   <YAxis dataKey="act" type="category" width={80} />
                   <Tooltip />
                   <Bar dataKey="percentage" fill="#22c55e">
-                    {topFavoriteActs.slice(0, 5).map((entry, index) => (
+                    {topFavoriteActs.slice(0, 5).map((_, index) => (
                       <Cell key={`cell-${index}`} fill={index < 3 ? '#22c55e' : '#3b82f6'} />
                     ))}
                   </Bar>

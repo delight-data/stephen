@@ -1,49 +1,36 @@
-import React from 'react';
-import { HashRouter as Router, Routes, Route, useParams } from 'react-router-dom';
-
-import TheaterSentimentDashboard from './TheaterSentimentDashboard';
-import FrancofoliesDashboard from './francofolies-sentiment-analysis';
-import PlpDashboard from './plp-dashboard';
-import franceGalop from './franceGalop';
-import CircusDashboard from './Circus Dashboard';
-import ldlcDashboard from './ldlc.tsx'; 
-import UgoPlay from './ugo-play.tsx'
+import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
+import * as dashboards from './dashboards'
+import Home from './pages/Home'
+import Page404 from './pages/Page404'
+type DashboardKeys = keyof typeof dashboards;
 
 // Fonction pour charger dynamiquement un dashboard
 const DashboardLoader = () => {
   const { dashboardId } = useParams();
+  const key = dashboardId?.replace('-', '_')
+  const current = dashboards[key as DashboardKeys]
 
-  // Mapping des fichiers de dashboard
-  const dashboards: { [key: string]: React.FC } = {
-    "renaissance-c52s9g": TheaterSentimentDashboard,
-    "francofolies-dh3qf7": FrancofoliesDashboard,
-    "plp-b91lc": PlpDashboard,
-    "fg-a7f6h": franceGalop,
-    "gruss-p2n8v": CircusDashboard,
-    "ldlc-h3p8rt": ldlcDashboard,
-    "ugo-play-b8afv": UgoPlay,
-    // Ajouter d'autres dashboards ici : "client2": Client2Dashboard,
-  };
-  const SelectedDashboard = dashboards[dashboardId];
+  if(!key || !current)  return (<Page404/>)
 
-  return (
-    <div className="min-h-screen bg-gray-100">
-      {SelectedDashboard ? <SelectedDashboard /> : <h1>Dashboard non trouvé</h1>}
-    </div>
-  );
+    const SelectedDashboard = dashboards[key as DashboardKeys];
+    return (<div className="min-h-screen bg-gray-100"><SelectedDashboard /></div>);
+
 };
 
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<h1>Désolé, dashboard introuvable</h1>} />
-        <Route path="/dashboard/:dashboardId" element={<DashboardLoader />} />
+        <Route index element={<Home anonymous={true}/>} />
+        <Route path="stephen-15kk88" element={<Home anonymous={false}/>} />
+        <Route path="dashboard/:dashboardId" element={<DashboardLoader />} />
+        { /* Catch all route */ }
+        <Route path="*" element={<Page404 />}  />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 
-
 export default App;
+

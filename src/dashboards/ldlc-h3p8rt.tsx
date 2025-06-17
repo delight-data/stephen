@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell, PieChart, Pie, LineChart, Line, AreaChart, Area, ComposedChart, ScatterChart, Scatter } from 'recharts';
+import { useState } from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell, PieChart, Pie, LineChart, Line, Area, ComposedChart, ScatterChart, Scatter } from 'recharts';
 
 const NewsletterPerformanceDashboard = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -176,23 +176,6 @@ const NewsletterPerformanceDashboard = () => {
     }
   ];
 
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-white p-4 border border-gray-300 rounded shadow-lg">
-          <p className="font-semibold">{label}</p>
-          {payload.map((entry, index) => (
-            <p key={index} className="text-sm" style={{ color: entry.color }}>
-              {entry.name}: {typeof entry.value === 'number' ? entry.value.toFixed(2) : entry.value}
-              {entry.name.includes('Rate') || entry.name.includes('Taux') ? '%' : ''}
-            </p>
-          ))}
-        </div>
-      );
-    }
-    return null;
-  };
-
   const renderContent = () => {
     switch(activeTab) {
       case 'overview':
@@ -231,7 +214,7 @@ const NewsletterPerformanceDashboard = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis type="number" />
                   <YAxis dataKey="type" type="category" width={150} />
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip  />
                   <Legend />
                   <Bar dataKey="avgOpenRate" name="Taux d'Ouverture %" fill="#3b82f6" />
                   <Bar dataKey="avgClickRate" name="Taux de Clic %" fill="#f59e0b" />
@@ -246,7 +229,7 @@ const NewsletterPerformanceDashboard = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="type" angle={-45} textAnchor="end" height={80} />
                   <YAxis />
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip  />
                   <Bar dataKey="avgRate" name="Part des clics %">
                     {ctaPerformance.slice(0, 6).map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />
@@ -263,7 +246,7 @@ const NewsletterPerformanceDashboard = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="month" />
                   <YAxis />
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip  />
                   <Legend />
                   <Line type="monotone" dataKey="openRate" name="Taux d'Ouverture %" stroke="#3b82f6" strokeWidth={2} />
                   <Line type="monotone" dataKey="clickRate" name="Taux de Clic %" stroke="#f59e0b" strokeWidth={2} />
@@ -286,7 +269,7 @@ const NewsletterPerformanceDashboard = () => {
                   <XAxis dataKey="week" />
                   <YAxis yAxisId="left" />
                   <YAxis yAxisId="right" orientation="right" />
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip  />
                   <Legend />
                   <Area yAxisId="left" type="monotone" dataKey="openRate" name="Taux d'Ouverture %" fill="#3b82f6" stroke="#3b82f6" fillOpacity={0.3} />
                   <Line yAxisId="right" type="monotone" dataKey="clickRate" name="Taux de Clic %" stroke="#f59e0b" strokeWidth={2} />
@@ -306,7 +289,7 @@ const NewsletterPerformanceDashboard = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="event" angle={-45} textAnchor="end" height={100} />
                   <YAxis />
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip  />
                   <Legend />
                   <Bar dataKey="avgOpenRate" name="Taux d'Ouverture %" fill="#3b82f6" />
                   <Bar dataKey="avgClickRate" name="Taux de Clic %" fill="#f59e0b" />
@@ -325,7 +308,7 @@ const NewsletterPerformanceDashboard = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="timing" />
                   <YAxis />
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip  />
                   <Legend />
                   <Line type="monotone" dataKey="avgOpenRate" name="Taux d'Ouverture %" stroke="#3b82f6" strokeWidth={2} />
                   <Line type="monotone" dataKey="avgClickRate" name="Taux de Clic %" stroke="#f59e0b" strokeWidth={2} />
@@ -466,7 +449,7 @@ const NewsletterPerformanceDashboard = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis type="number" />
                   <YAxis dataKey="type" type="category" width={120} />
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip  />
                   <Legend />
                   <Bar dataKey="totalClicks" name="Total Clics" fill="#3b82f6" />
                   <Bar dataKey="avgRate" name="Part des clics %" fill="#f59e0b" />
@@ -594,7 +577,7 @@ const NewsletterPerformanceDashboard = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="metric" />
                   <YAxis />
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip  />
                   <Legend />
                   <Bar dataKey="ldlcArena" name="LDLC Arena" fill="#3b82f6" />
                   <Bar dataKey="sectorAvg" name="Moyenne Secteur" fill="#64748b" />

@@ -1,0 +1,37 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Fond -->
+  <rect x="6" y="6" width="52" height="52" rx="12" ry="12" fill="url(#bgGradient)" />
+  
+  <!-- Grille simple 2x2 -->
+  <g fill="rgba(255,255,255,0.9)">
+    <!-- Widget 1 - Graphique en barres simplifié -->
+    <rect x="16" y="16" width="12" height="12" rx="2" fill="rgba(255,255,255,0.2)"/>
+    <rect x="18" y="24" width="1.5" height="4" rx="0.5"/>
+    <rect x="20.5" y="22" width="1.5" height="6" rx="0.5"/>
+    <rect x="23" y="20" width="1.5" height="8" rx="0.5"/>
+    <rect x="25.5" y="23" width="1.5" height="5" rx="0.5"/>
+    
+    <!-- Widget 2 - Cercle simple -->
+    <rect x="36" y="16" width="12" height="12" rx="2" fill="rgba(255,255,255,0.2)"/>
+    <circle cx="42" cy="22" r="3" fill="none" stroke="white" stroke-width="1.5"/>
+    <path d="M 42 19 A 3 3 0 0 1 45 22 L 42 22 Z" fill="white"/>
+    
+    <!-- Widget 3 - Lignes métriques -->
+    <rect x="16" y="36" width="12" height="12" rx="2" fill="rgba(255,255,255,0.2)"/>
+    <rect x="18" y="40" width="8" height="1" rx="0.5"/>
+    <rect x="18" y="42" width="6" height="1" rx="0.5"/>
+    <rect x="18" y="44" width="7" height="1" rx="0.5"/>
+    
+    <!-- Widget 4 - Graphique courbe simple -->
+    <rect x="36" y="36" width="12" height="12" rx="2" fill="rgba(255,255,255,0.2)"/>
+    <polyline points="38,44 40,42 42,40 44,42 46,39" 
+              fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+</svg>

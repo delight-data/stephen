@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell, PieChart, Pie, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, LineChart, Line } from 'recharts';
+import  { useState } from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell, PieChart, Pie, LineChart, Line } from 'recharts';
 
 const TheatreSentimentDashboard = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -148,23 +148,7 @@ const TheatreSentimentDashboard = () => {
     }
   ];
   
-  // Custom tooltip for charts
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-white p-4 border border-gray-300 rounded shadow-md">
-          <p className="font-semibold">{label}</p>
-          {payload.map((entry, index) => (
-            <p key={index} className="text-sm" style={{ color: entry.color || entry.stroke }}>
-              {entry.name}: {entry.value}
-              {entry.name.includes('Note') ? '' : '%'}
-            </p>
-          ))}
-        </div>
-      );
-    }
-    return null;
-  };
+
   
   // Render tab content
   const renderContent = () => {
@@ -183,7 +167,7 @@ const TheatreSentimentDashboard = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis tickFormatter={(value) => `${value}%`} />
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip />
                   <Bar dataKey="value" name="Pourcentage" fill="#4ade80">
                     {noteDistribution.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />
@@ -661,7 +645,7 @@ const TheatreSentimentDashboard = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis tickFormatter={(value) => `${value}%`} />
-                  <Tooltip formatter={(value) => `${value.toFixed(1)}%`} />
+                  <Tooltip formatter={(value) => `${Number(value).toFixed(1)}%`} />
                   <Legend />
                   <Line type="monotone" dataKey="tv" name="Télévision" stroke="#ef4444" strokeWidth={2} />
                   <Line type="monotone" dataKey="presse" name="Presse" stroke="#f59e0b" strokeWidth={2} />
