@@ -49,7 +49,7 @@ body {
   display: flex;
   place-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow: auto;
 }
 
 /* This is just to transition when you change the viewport size. */
